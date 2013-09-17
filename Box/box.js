@@ -11,6 +11,11 @@ var pt2 = { x: 100, y: 10 };
 var pt3 = { x: 100, y: 100 };
 var pt4 = { x: 10, y: 100 };
 
+var update = function(modifier) {
+	pt3.x += modifier;
+}
+
+//make-stuff-happen code
 var render = function() {
 	if (ready)
 	{
@@ -29,7 +34,8 @@ var render = function() {
 
 var main = function() {
 	var now = Date.now();
-	var delta = now = then;
+	var delta = now - then;
+	update(delta / 1000);
 	render();
 	then = now;
 };
@@ -37,4 +43,4 @@ var main = function() {
 //off we go
 var ready = true;
 var then = Date.now();
-main();
+setInterval(main,1);
