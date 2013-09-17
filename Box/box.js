@@ -11,11 +11,27 @@ var pt2 = { x: 100, y: 10 };
 var pt3 = { x: 100, y: 100 };
 var pt4 = { x: 10, y: 100 };
 
-var update = function(modifier) {
-	pt3.x += modifier;
-}
 
+//----
+//Framework functions
+//----
+var update = function(modifier) {
+	pt3.x -= modifier;
+};
+
+//This code from http://stackoverflow.com/a/6722031/380176
+var resetGraphics = function() {
+	ctx.save();
+	// Use the identity matrix while clearing the canvas
+	ctx.setTransform(1, 0, 0, 1, 0, 0);
+	ctx.clearRect(0, 0, canvas.width, canvas.height);
+	ctx.restore();
+};
+
+//----
 //make-stuff-happen code
+//----
+
 var render = function() {
 	if (ready)
 	{
@@ -35,6 +51,7 @@ var render = function() {
 var main = function() {
 	var now = Date.now();
 	var delta = now - then;
+	resetGraphics();
 	update(delta / 1000);
 	render();
 	then = now;
