@@ -6,17 +6,19 @@ canvas.height = 480;
 document.body.appendChild(canvas);
 
 //Some data
-var pt1 = { x: 10, y: 10 };
-var pt2 = { x: 100, y: 10 };
-var pt3 = { x: 100, y: 100 };
-var pt4 = { x: 10, y: 100 };
+var pts = new Array(
+	{ x: 10, y: 10 },
+	{ x: 100, y: 10 },
+	{ x: 100, y: 100 },
+	{ x: 10, y: 100 }
+);
 
 
 //----
 //Framework functions
 //----
 var update = function(modifier) {
-	pt3.x -= modifier;
+	pts[2].x -= modifier;
 };
 
 //This code from http://stackoverflow.com/a/6722031/380176
@@ -36,11 +38,12 @@ var render = function() {
 	if (ready)
 	{
 		ctx.beginPath();
-		ctx.moveTo(pt1.x, pt1.y);
-		ctx.lineTo(pt2.x, pt2.y);
-		ctx.lineTo(pt3.x, pt3.y);
-		ctx.lineTo(pt4.x, pt4.y);
-		ctx.lineTo(pt1.x, pt1.y);
+		ctx.moveTo(pts[0].x, pts[0].y);
+		for(i = 1; i < pts.length; i++)
+		{
+			ctx.lineTo(pts[i].x, pts[i].y);
+		}	
+		ctx.lineTo(pts[0].x, pts[0].y);
 		ctx.stroke();
 		ctx.fillStyle = '#8ED6FF';
       ctx.fill();
