@@ -5,39 +5,11 @@ canvas.width = 512;
 canvas.height = 480;
 document.body.appendChild(canvas);
 
-//Some data
-function shape (numPoints) {
-   this.centerX = 200;
-   this.centerY = 200;
-   this.rot = 0;
-   this.rho = 142;
-   this.numPoints = numPoints;
-   this.pts = new Array()
-/*
-	{ x: 10, y: 10 },
-	{ x: 100, y: 10 },
-	{ x: 100, y: 100 },
-	{ x: 10, y: 100 }
-   );
-*/
-};
-
-//Initialize a square (for now)
-var square = new shape(4);
-var arc = 2 * Math.PI / square.numPoints;
-for(i=0; i < square.numPoints; i++)
-{
-   square.pts[i] = {
-      x: square.rho * Math.cos(i * arc + square.rot) + square.centerX, 
-      y: square.rho * Math.sin(i * arc + square.rot) + square.centerY
-   };
-}
-
 //----
 //Framework functions
 //----
-var update = function(shape, modifier) {
-   shape.rot += Math.PI / 2 * modifier
+
+var updateShapePoints = function(shape) {
    var arc = 2 * Math.PI / shape.numPoints;
    for(i=0; i < shape.numPoints; i++)
    {
@@ -46,6 +18,11 @@ var update = function(shape, modifier) {
 	 y: shape.rho * Math.sin(i * arc + shape.rot) + shape.centerY
       };
    }
+};
+
+var update = function(shape, modifier) {
+   shape.rot += Math.PI / 2 * modifier
+   updateShapePoints(shape);
 };
 
 //This code from http://stackoverflow.com/a/6722031/380176
@@ -86,6 +63,21 @@ var main = function() {
 	renderBox(square);
 	then = now;
 };
+
+//Some data
+function shape (numPoints) {
+   this.centerX = 200;
+   this.centerY = 200;
+   this.rot = 0;
+   this.rho = 72;
+   this.numPoints = numPoints;
+   this.pts = new Array()
+};
+
+//Initialize a square (for now)
+var square = new shape(4);
+var arc = 2 * Math.PI / square.numPoints;
+updateShapePoints(square);
 
 //off we go
 var ready = true;
