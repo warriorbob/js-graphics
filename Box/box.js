@@ -11,7 +11,7 @@ function shape () {
    this.centerY = 100;
    this.rot = 0;
    this.rho = 42;
-   this.numPoints = 4;
+   this.numPoints = 7;
    this.pts = new Array()
 /*
 	{ x: 10, y: 10 },
@@ -26,7 +26,7 @@ function shape () {
 var square = new shape();
 square.pts = new Array(4);
 var arc = 2 * Math.PI / square.numPoints;
-for(i=0; i < 4; i++)
+for(i=0; i < square.numPoints; i++)
 {
    square.pts[i] = {
       x: square.rho * Math.cos(i * arc + square.rot) + square.centerX, 
@@ -41,7 +41,7 @@ var update = function(shape, modifier) {
    //square.pts[2].x -= modifier;
    shape.rot += Math.PI / 2 * modifier
    var arc = 2 * Math.PI / shape.numPoints;
-   for(i=0; i < 4; i++)
+   for(i=0; i < square.numPoints; i++)
    {
       shape.pts[i] = {
 	 x: shape.rho * Math.cos(i * arc + shape.rot) + shape.centerX, 
