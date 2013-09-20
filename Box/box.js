@@ -6,12 +6,12 @@ canvas.height = 480;
 document.body.appendChild(canvas);
 
 //Some data
-function shape () {
-   this.centerX = 100;
-   this.centerY = 100;
+function shape (numPoints) {
+   this.centerX = 200;
+   this.centerY = 200;
    this.rot = 0;
-   this.rho = 42;
-   this.numPoints = 4;
+   this.rho = 142;
+   this.numPoints = numPoints;
    this.pts = new Array()
 /*
 	{ x: 10, y: 10 },
@@ -23,7 +23,7 @@ function shape () {
 };
 
 //Initialize a square (for now)
-var square = new shape();
+var square = new shape(4);
 var arc = 2 * Math.PI / square.numPoints;
 for(i=0; i < square.numPoints; i++)
 {
