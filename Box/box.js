@@ -7,24 +7,47 @@ document.body.appendChild(canvas);
 
 //Some data
 function shape () {
-   this.centerX = 50;
-   this.centerY = 50;
-   this.angle = 0;
-   this.pts = new Array(
+   this.centerX = 100;
+   this.centerY = 100;
+   this.rot = 0;
+   this.rho = 42;
+   this.numPoints = 4;
+   this.pts = new Array()
+/*
 	{ x: 10, y: 10 },
 	{ x: 100, y: 10 },
 	{ x: 100, y: 100 },
 	{ x: 10, y: 100 }
    );
+*/
 };
 
+//Initialize a square (for now)
 var square = new shape();
+square.pts = new Array(4);
+var arc = 2 * Math.PI / square.numPoints;
+for(i=0; i < 4; i++)
+{
+   square.pts[i] = {
+      x: square.rho * Math.cos(i * arc + square.rot) + square.centerX, 
+      y: square.rho * Math.sin(i * arc + square.rot) + square.centerY
+   };
+}
 
 //----
 //Framework functions
 //----
-var update = function(modifier) {
-	square.pts[2].x -= modifier;
+var update = function(shape, modifier) {
+   //square.pts[2].x -= modifier;
+   shape.rot += Math.PI / 2 * modifier
+   var arc = 2 * Math.PI / shape.numPoints;
+   for(i=0; i < 4; i++)
+   {
+      shape.pts[i] = {
+	 x: shape.rho * Math.cos(i * arc + shape.rot) + shape.centerX, 
+	 y: shape.rho * Math.sin(i * arc + shape.rot) + shape.centerY
+      };
+   }
 };
 
 //This code from http://stackoverflow.com/a/6722031/380176
@@ -61,7 +84,7 @@ var main = function() {
 	var now = Date.now();
 	var delta = now - then;
 	resetGraphics();
-	update(delta / 1000);
+	update(square, delta / 1000);
 	renderBox(square);
 	then = now;
 };
