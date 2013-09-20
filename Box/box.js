@@ -11,7 +11,7 @@ function shape () {
    this.centerY = 100;
    this.rot = 0;
    this.rho = 42;
-   this.numPoints = 7;
+   this.numPoints = 4;
    this.pts = new Array()
 /*
 	{ x: 10, y: 10 },
@@ -24,7 +24,6 @@ function shape () {
 
 //Initialize a square (for now)
 var square = new shape();
-square.pts = new Array(4);
 var arc = 2 * Math.PI / square.numPoints;
 for(i=0; i < square.numPoints; i++)
 {
