@@ -6,19 +6,25 @@ canvas.height = 480;
 document.body.appendChild(canvas);
 
 //Some data
-var pts = new Array(
+function shape () {
+   this.centerX = 50;
+   this.centerY = 50;
+   this.angle = 0;
+   this.pts = new Array(
 	{ x: 10, y: 10 },
 	{ x: 100, y: 10 },
 	{ x: 100, y: 100 },
 	{ x: 10, y: 100 }
-);
+   );
+};
 
+var square = new shape();
 
 //----
 //Framework functions
 //----
 var update = function(modifier) {
-	pts[2].x -= modifier;
+	square.pts[2].x -= modifier;
 };
 
 //This code from http://stackoverflow.com/a/6722031/380176
@@ -34,16 +40,16 @@ var resetGraphics = function() {
 //make-stuff-happen code
 //----
 
-var render = function() {
+var renderBox = function(shape) {
 	if (ready)
 	{
 		ctx.beginPath();
-		ctx.moveTo(pts[0].x, pts[0].y);
-		for(i = 1; i < pts.length; i++)
+		ctx.moveTo(shape.pts[0].x, shape.pts[0].y);
+		for(i = 1; i < shape.pts.length; i++)
 		{
-			ctx.lineTo(pts[i].x, pts[i].y);
+			ctx.lineTo(shape.pts[i].x, shape.pts[i].y);
 		}	
-		ctx.lineTo(pts[0].x, pts[0].y);
+		ctx.lineTo(shape.pts[0].x, shape.pts[0].y);
 		ctx.stroke();
 		ctx.fillStyle = '#8ED6FF';
       ctx.fill();
@@ -56,7 +62,7 @@ var main = function() {
 	var delta = now - then;
 	resetGraphics();
 	update(delta / 1000);
-	render();
+	renderBox(square);
 	then = now;
 };
 
