@@ -37,10 +37,9 @@ for(i=0; i < square.numPoints; i++)
 //Framework functions
 //----
 var update = function(shape, modifier) {
-   //square.pts[2].x -= modifier;
    shape.rot += Math.PI / 2 * modifier
    var arc = 2 * Math.PI / shape.numPoints;
-   for(i=0; i < square.numPoints; i++)
+   for(i=0; i < shape.numPoints; i++)
    {
       shape.pts[i] = {
 	 x: shape.rho * Math.cos(i * arc + shape.rot) + shape.centerX, 
