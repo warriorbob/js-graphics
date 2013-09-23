@@ -14,8 +14,8 @@ var updateShapePoints = function(shape) {
    for(i=0; i < shape.numPoints; i++)
    {
       shape.pts[i] = {
-         x: shape.rho * Math.cos(i * arc + shape.rot) + shape.centerX, 
-         y: shape.rho * Math.sin(i * arc + shape.rot) + shape.centerY
+         x: shape.rho * Math.cos(i * arc + shape.rot) + shape.center.x, 
+         y: shape.rho * Math.sin(i * arc + shape.rot) + shape.center.y
       };
    }
 };
@@ -73,8 +73,7 @@ var main = function() {
 
 //Some data
 function shape (numPoints) {
-   this.centerX = 200;
-   this.centerY = 200;
+   this.center = { x: 200, y: 200 };
    this.rot = 0;
    this.rho = 72;
    this.numPoints = numPoints;
