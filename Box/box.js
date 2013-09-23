@@ -32,6 +32,14 @@ var resetGraphics = function() {
    ctx.setTransform(1, 0, 0, 1, 0, 0);
    ctx.clearRect(0, 0, canvas.width, canvas.height);
    ctx.restore();
+
+   ctx.beginPath();
+	ctx.moveTo(0,0);
+	ctx.lineTo(canvas.width,0);
+	ctx.lineTo(canvas.width,canvas.height);
+	ctx.lineTo(0,canvas.height);
+	ctx.lineTo(0,0);
+	ctx.stroke();
 };
 
 //----
@@ -51,7 +59,6 @@ var renderBox = function(shape) {
 		ctx.stroke();
 		ctx.fillStyle = '#8ED6FF';
       ctx.fill();
-		
 	}
 };
 
