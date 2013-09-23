@@ -22,6 +22,9 @@ var updateShapePoints = function(shape) {
 
 var update = function(shape, modifier) {
    shape.rot += Math.PI / 2 * modifier
+	shape.center.x += shape.vector.x * modifier;
+	shape.center.y += shape.vector.y * modifier;
+
    updateShapePoints(shape);
 };
 
@@ -74,6 +77,7 @@ var main = function() {
 //Some data
 function shape (numPoints) {
    this.center = { x: 200, y: 200 };
+	this.vector = { x: 50, y: 50 };
    this.rot = 0;
    this.rho = 72;
    this.numPoints = numPoints;
