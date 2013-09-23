@@ -14,8 +14,8 @@ var updateShapePoints = function(shape) {
    for(i=0; i < shape.numPoints; i++)
    {
       shape.pts[i] = {
-	 x: shape.rho * Math.cos(i * arc + shape.rot) + shape.centerX, 
-	 y: shape.rho * Math.sin(i * arc + shape.rot) + shape.centerY
+         x: shape.rho * Math.cos(i * arc + shape.rot) + shape.centerX, 
+         y: shape.rho * Math.sin(i * arc + shape.rot) + shape.centerY
       };
    }
 };
@@ -27,11 +27,11 @@ var update = function(shape, modifier) {
 
 //This code from http://stackoverflow.com/a/6722031/380176
 var resetGraphics = function() {
-	ctx.save();
-	// Use the identity matrix while clearing the canvas
-	ctx.setTransform(1, 0, 0, 1, 0, 0);
-	ctx.clearRect(0, 0, canvas.width, canvas.height);
-	ctx.restore();
+   ctx.save();
+   // Use the identity matrix while clearing the canvas
+   ctx.setTransform(1, 0, 0, 1, 0, 0);
+   ctx.clearRect(0, 0, canvas.width, canvas.height);
+   ctx.restore();
 };
 
 //----
