@@ -20,12 +20,39 @@ var updateShapePoints = function(shape) {
    }
 };
 
+var collide = function(shape, modifier) {
+	for(i=0;i<shape.pts.length;i++)
+	{
+		if(shape.pts[i].x <=0)
+		{
+			shape.vector.x = -shape.vector.x;
+			shape.center.x += -shape.pts[i].x;
+		}
+		else if(shape.pts[i].x >= canvas.width)
+		{
+			shape.vector.x = -shape.vector.x;
+			shape.center.x -= (shape.pts[i].x - canvas.width);
+		}	
+		if(shape.pts[i].y <=0)
+		{
+			shape.vector.y = -shape.vector.y;
+			shape.center.y += -shape.pts[i].y;
+		}
+		else if(shape.pts[i].y >= canvas.height)
+		{
+			shape.vector.y = -shape.vector.y;
+			shape.center.y -= (shape.pts[i].y - canvas.height);
+		}
+	}
+};
+
 var update = function(shape, modifier) {
    shape.rot += Math.PI / 2 * modifier
 	shape.center.x += shape.vector.x * modifier;
 	shape.center.y += shape.vector.y * modifier;
-
    updateShapePoints(shape);
+
+	collide(shape, modifier);
 };
 
 //This code from http://stackoverflow.com/a/6722031/380176
@@ -77,7 +104,7 @@ var main = function() {
 //Some data
 function shape (numPoints) {
    this.center = { x: 200, y: 200 };
-	this.vector = { x: 50, y: 50 };
+	this.vector = { x: 100, y: 100 };
    this.rot = 0;
    this.rho = 72;
    this.numPoints = numPoints;
