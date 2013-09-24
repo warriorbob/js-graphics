@@ -9,6 +9,11 @@ document.body.appendChild(canvas);
 //Framework functions
 //----
 
+//Math!
+var sign = function(x) {
+	return x > 0 ? 1 : x < 0 ? -1 : 0;
+}
+
 var updateShapePoints = function(shape) {
    var arc = 2 * Math.PI / shape.numPoints;
    for(i=0; i < shape.numPoints; i++)
@@ -24,34 +29,42 @@ var collide = function(shape, modifier) {
 	var foundCollision = false;
 	for(i=0;i<shape.pts.length;i++)
 	{
+		var offsetVector = { 
+			xoff: shape.center.x - shape.pts[i].x,
+			yoff: shape.center.y - shape.pts[i].y,
+		}
 		if(shape.pts[i].x <=0)
 		{
 			shape.vector.x = -shape.vector.x;
 			shape.center.x += -shape.pts[i].x;
+			shape.rotSpeedRatio = Math.abs(shape.rotSpeedRatio) * sign(offsetVector.yoff);
 			foundCollision = true;
 		}
 		else if(shape.pts[i].x >= canvas.width)
 		{
 			shape.vector.x = -shape.vector.x;
 			shape.center.x -= (shape.pts[i].x - canvas.width);
+			shape.rotSpeedRatio = Math.abs(shape.rotSpeedRatio) * -sign(offsetVector.yoff);
 			foundCollision = true;
 		}	
 		if(shape.pts[i].y <=0)
 		{
 			shape.vector.y = -shape.vector.y;
 			shape.center.y += -shape.pts[i].y;
+			shape.rotSpeedRatio = Math.abs(shape.rotSpeedRatio) * -sign(offsetVector.xoff);
 			foundCollision = true;
 		}
 		else if(shape.pts[i].y >= canvas.height)
 		{
 			shape.vector.y = -shape.vector.y;
 			shape.center.y -= (shape.pts[i].y - canvas.height);
+			shape.rotSpeedRatio = Math.abs(shape.rotSpeedRatio) * sign(offsetVector.xoff);
 			foundCollision = true;
 		}
 	}
 	if(foundCollision)
 	{
-		shape.rotSpeedRatio = -shape.rotSpeedRatio;
+		//shape.rotSpeedRatio = -shape.rotSpeedRatio;
 	}
 };
 
@@ -112,8 +125,8 @@ var main = function() {
 
 //Some data
 function shape (numPoints) {
-   this.center = { x: 200, y: 200 };
-	this.vector = { x: 100, y: 100 };
+   this.center = { x: 150, y: 200 };
+	this.vector = { x: -100, y: 100 };
    this.rot = 0;
 	this.rotSpeedRatio = 1;
    this.rho = 72;
