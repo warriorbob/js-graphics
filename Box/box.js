@@ -21,33 +21,42 @@ var updateShapePoints = function(shape) {
 };
 
 var collide = function(shape, modifier) {
+	var foundCollision = false;
 	for(i=0;i<shape.pts.length;i++)
 	{
 		if(shape.pts[i].x <=0)
 		{
 			shape.vector.x = -shape.vector.x;
 			shape.center.x += -shape.pts[i].x;
+			foundCollision = true;
 		}
 		else if(shape.pts[i].x >= canvas.width)
 		{
 			shape.vector.x = -shape.vector.x;
 			shape.center.x -= (shape.pts[i].x - canvas.width);
+			foundCollision = true;
 		}	
 		if(shape.pts[i].y <=0)
 		{
 			shape.vector.y = -shape.vector.y;
 			shape.center.y += -shape.pts[i].y;
+			foundCollision = true;
 		}
 		else if(shape.pts[i].y >= canvas.height)
 		{
 			shape.vector.y = -shape.vector.y;
 			shape.center.y -= (shape.pts[i].y - canvas.height);
+			foundCollision = true;
 		}
+	}
+	if(foundCollision)
+	{
+		shape.rotSpeedRatio = -shape.rotSpeedRatio;
 	}
 };
 
 var update = function(shape, modifier) {
-   shape.rot += Math.PI / 2 * modifier
+   shape.rot += Math.PI / 2 * modifier * shape.rotSpeedRatio
 	shape.center.x += shape.vector.x * modifier;
 	shape.center.y += shape.vector.y * modifier;
    updateShapePoints(shape);
@@ -106,6 +115,7 @@ function shape (numPoints) {
    this.center = { x: 200, y: 200 };
 	this.vector = { x: 100, y: 100 };
    this.rot = 0;
+	this.rotSpeedRatio = 1;
    this.rho = 72;
    this.numPoints = numPoints;
    this.pts = new Array()
