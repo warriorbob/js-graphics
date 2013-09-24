@@ -26,7 +26,6 @@ var updateShapePoints = function(shape) {
 };
 
 var collide = function(shape, modifier) {
-	var foundCollision = false;
 	for(i=0;i<shape.pts.length;i++)
 	{
 		var offsetVector = { 
@@ -61,10 +60,6 @@ var collide = function(shape, modifier) {
 			shape.rotSpeedRatio = Math.abs(shape.rotSpeedRatio) * sign(offsetVector.xoff);
 			foundCollision = true;
 		}
-	}
-	if(foundCollision)
-	{
-		//shape.rotSpeedRatio = -shape.rotSpeedRatio;
 	}
 };
 
@@ -126,7 +121,7 @@ var main = function() {
 //Some data
 function shape (numPoints) {
    this.center = { x: 150, y: 200 };
-	this.vector = { x: -100, y: 100 };
+	this.vector = { x: -300, y: 300 };
    this.rot = 0;
 	this.rotSpeedRatio = 1;
    this.rho = 72;
