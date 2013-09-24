@@ -72,10 +72,6 @@ var resetGraphics = function() {
 	ctx.stroke();
 };
 
-//----
-//make-stuff-happen code
-//----
-
 var renderBox = function(shape) {
 	if (ready)
 	{
@@ -91,6 +87,10 @@ var renderBox = function(shape) {
       ctx.fill();
 	}
 };
+
+//----
+//make-stuff-happen code
+//----
 
 var main = function() {
 	var now = Date.now();
