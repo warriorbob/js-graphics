@@ -5,6 +5,17 @@ canvas.width = 512;
 canvas.height = 480;
 document.body.appendChild(canvas);
 
+// Capture keyboard input
+var keysDown = { };
+
+addEventListener("keydown", function (e) {
+	keysDown[e.keyCode] = true;
+}, false);
+
+addEventListener("keyup", function(e) {
+	delete keysDown[e.keyCode];
+}, false);
+
 //----
 //Framework functions
 //----
@@ -70,6 +81,23 @@ var update = function(shape, modifier) {
    updateShapePoints(shape);
 
 	collide(shape, modifier);
+
+	if (48 in keysDown)	//"0"
+	{
+		square.numPoints = (10);
+		square.pts.length = 0;
+		delete keysDown[48];
+	}
+
+	for(i=49; i<58; i++)
+	{
+		if (i in keysDown)
+		{
+			square.numPoints = (i-48);
+			square.pts.length = 0;
+			delete keysDown[i];
+		}
+	}
 };
 
 //This code from http://stackoverflow.com/a/6722031/380176
