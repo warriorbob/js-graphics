@@ -38,14 +38,38 @@ var resetGraphics = function() {
 	ctx.stroke();
 };
 
+//---------------
+//Interesting stuff
+
+function star(x,y,radius) {
+	this.x = x;
+	this.y = y;
+	this.radius = radius;
+}
+ 
+var stars = [];
+stars.push(new star(256, 240, 10));
+
 var update = function(modifier) {
 };
+
+var draw = function(){
+	for(var i = 0; i < stars.length; i++){
+		ctx.fillStyle = "black";
+		ctx.beginPath();
+		ctx.arc(stars[i].x, stars[i].y, stars[i].radius, 0, Math.PI * 2, false);
+		ctx.fill();
+	}
+};
+
+//---------------
 
 var main = function() {
 	var now = Date.now();
 	var delta = now - then;
 	resetGraphics();
 	update(delta / 1000);
+	draw();
 	then = now;
 };
 
