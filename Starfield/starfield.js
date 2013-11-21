@@ -45,6 +45,7 @@ var resetGraphics = function() {
 //Constants
 var NUM_LAYERS = 3;
 var STARS_PER_LAYER = 80;
+var DRIFT_PPS = 50;
 
 function star(x,y,radius) {
 	this.x = x;
@@ -61,11 +62,18 @@ for(var i = 0; i < starlayers.length; i++){
 //For each layer, fill it with random stars
 for(var l = 0; l < starlayers.length; l++){
 	for(var s = 0; s < STARS_PER_LAYER; s++){
-		starlayers[l].push(new star(Math.floor(Math.random() * 512 + 1), Math.floor(Math.random() * 480 + 1), 2 / (l+1)));
+		starlayers[l].push(
+			new star(
+				Math.floor(Math.random() * 512 + 1), 
+				Math.floor(Math.random() * 480 + 1), 
+				2 / (l+1)
+			)
+		);
 	}
 }
 
 var update = function(modifier) {
+
 };
 
 var draw = function(){
