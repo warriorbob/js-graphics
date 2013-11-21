@@ -64,9 +64,9 @@ for(var l = 0; l < starlayers.length; l++){
 	for(var s = 0; s < STARS_PER_LAYER; s++){
 		starlayers[l].push(
 			new star(
-				Math.floor(Math.random() * 512 + 1), 
-				Math.floor(Math.random() * 480 + 1), 
-				2 / (l+1)
+				Math.floor(Math.random() * 512 + 1),	//X
+				Math.floor(Math.random() * 480 + 1),	//Y 
+				2 / (l+1)	//Radius
 			)
 		);
 	}
