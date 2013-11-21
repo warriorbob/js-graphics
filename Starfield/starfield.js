@@ -40,6 +40,11 @@ var resetGraphics = function() {
 
 //---------------
 //Interesting stuff
+//---------------
+
+//Constants
+var NUM_LAYERS = 3;
+var STARS_PER_LAYER = 80;
 
 function star(x,y,radius) {
 	this.x = x;
@@ -47,23 +52,36 @@ function star(x,y,radius) {
 	this.radius = radius;
 }
  
-var stars = [];
-stars.push(new star(256, 240, 10));
+//Create star layers as arrays
+var starlayers = new Array(NUM_LAYERS);
+for(var i = 0; i < starlayers.length; i++){
+	starlayers[i] = [];
+}
+
+//For each layer, fill it with random stars
+for(var l = 0; l < starlayers.length; l++){
+	for(var s = 0; s < STARS_PER_LAYER; s++){
+		starlayers[l].push(new star(Math.floor(Math.random() * 512 + 1), Math.floor(Math.random() * 480 + 1), 2 / (l+1)));
+	}
+}
 
 var update = function(modifier) {
 };
 
 var draw = function(){
-	for(var i = 0; i < stars.length; i++){
-		ctx.fillStyle = "black";
-		ctx.beginPath();
-		ctx.arc(stars[i].x, stars[i].y, stars[i].radius, 0, Math.PI * 2, false);
-		ctx.fill();
+	for(var l = 0; l < starlayers.length; l++){
+		for(var s = 0; s < starlayers[l].length; s++){
+			ctx.fillStyle = "black";
+			ctx.beginPath();
+			ctx.arc(starlayers[l][s].x, starlayers[l][s].y, starlayers[l][s].radius, 0, Math.PI * 2, false);
+			ctx.fill();
+		}
 	}
 };
 
 //---------------
-
+// Go
+//---------------
 var main = function() {
 	var now = Date.now();
 	var delta = now - then;
