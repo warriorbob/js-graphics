@@ -45,9 +45,9 @@ var resetGraphics = function() {
 //---------------
 
 //Constants
-var NUM_LAYERS = 3;
+var NUM_LAYERS = 6;
 var STARS_PER_LAYER = 80;
-var DRIFT_PPS = 100;
+var DRIFT_PPS = -120;
 
 function star(x,y,radius) {
 	this.x = x;
@@ -68,7 +68,7 @@ for(var l = 0; l < starlayers.length; l++){
 			new star(
 				Math.floor(Math.random() * 512 + 1),	//X
 				Math.floor(Math.random() * 480 + 1),	//Y 
-				2 / (l+1)	//Radius (also: Hasty math)
+				1 / (l+1)	//Radius (also: Hasty math)
 			)
 		);
 	}
