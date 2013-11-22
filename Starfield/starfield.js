@@ -7,6 +7,7 @@ canvas.width = CANVAS_WIDTH;
 canvas.height = CANVAS_HEIGHT;
 document.body.appendChild(canvas);
 
+
 // Capture keyboard input
 var keysDown = { };
 
