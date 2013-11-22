@@ -1,8 +1,10 @@
 // Create canvas and such
 var canvas = document.createElement("canvas");
 var ctx = canvas.getContext("2d");
-canvas.width = 512;
-canvas.height = 480;
+var CANVAS_WIDTH = 512;
+var CANVAS_HEIGHT = 480;
+canvas.width = CANVAS_WIDTH;
+canvas.height = CANVAS_HEIGHT;
 document.body.appendChild(canvas);
 
 // Capture keyboard input
@@ -77,6 +79,15 @@ var update = function(modifier) {
 	for(var l = 0; l < starlayers.length; l++){
 		for(var s = 0; s < starlayers[l].length; s++){
 			starlayers[l][s].x += modifier * DRIFT_PPS * 1/(l+1);	//Hasty math
+		}
+	}
+
+	//Disappear offscreen stars and reappear them on the other side
+	for(var l = 0; l < starlayers.length; l++){
+		for(var s = 0; s < starlayers[l].length; s++){
+			if(starlayers[l][s].x < 0){
+				starlayers[l][s].x = CANVAS_WIDTH;
+			}
 		}
 	}
 };
