@@ -47,7 +47,7 @@ var resetGraphics = function() {
 //Constants
 var NUM_LAYERS = 3;
 var STARS_PER_LAYER = 80;
-var DRIFT_PPS = -50;
+var DRIFT_PPS = 100;
 
 function star(x,y,radius) {
 	this.x = x;
@@ -86,8 +86,10 @@ var update = function(modifier) {
 	for(var l = 0; l < starlayers.length; l++){
 		for(var s = 0; s < starlayers[l].length; s++){
 			if(starlayers[l][s].x < 0){
-				starlayers[l][s].x = CANVAS_WIDTH;
-			}
+				starlayers[l][s].x += CANVAS_WIDTH;
+			} else if(starlayers[l][s].x > CANVAS_WIDTH){
+				starlayers[l][s].x -= CANVAS_WIDTH;
+			}			
 		}
 	}
 };
