@@ -66,16 +66,17 @@ for(var l = 0; l < starlayers.length; l++){
 			new star(
 				Math.floor(Math.random() * 512 + 1),	//X
 				Math.floor(Math.random() * 480 + 1),	//Y 
-				2 / (l+1)	//Radius
+				2 / (l+1)	//Radius (also: Hasty math)
 			)
 		);
 	}
 }
 
 var update = function(modifier) {
+	//Move stars in each layer
 	for(var l = 0; l < starlayers.length; l++){
 		for(var s = 0; s < starlayers[l].length; s++){
-			starlayers[l][s].x += modifier * DRIFT_PPS * 1/(l+1);
+			starlayers[l][s].x += modifier * DRIFT_PPS * 1/(l+1);	//Hasty math
 		}
 	}
 };
