@@ -45,16 +45,24 @@ var resetGraphics = function() {
 //Interesting stuff
 //---------------
 
-function point(x,y,z) {
+//Structures
+function sprite(x, y, z, img) {
 	this.x = x;
 	this.y = y;
 	this.z = z;
+	this.img = img;	//Should be type "Image"
 }
+
+//Init
+var sprimg = new Image();
+sprimg.src = "untitled.png";
+var spr = new sprite(0,0,0,sprimg);
  
 var update = function(modifier) {
 };
 
 var draw = function(){
+	ctx.drawImage(spr.img, 200,250, spr.img.width, spr.img.height);
 };
 
 //---------------
