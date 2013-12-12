@@ -53,16 +53,43 @@ function sprite(x, y, z, img) {
 	this.img = img;	//Should be type "Image"
 }
 
+var scalex = 1;
+var scaley = 1;
+var xdir = 1;
+var xspeed = 1;
+var ydir = 1;
+var yspeed = 1;
+
 //Init
 var sprimg = new Image();
 sprimg.src = "untitled.png";
 var spr = new sprite(0,0,0,sprimg);
  
 var update = function(modifier) {
+	if (scalex >= 1) {
+		xdir = -1;
+	} else if (scalex <= 0) {
+		xdir = 1;
+	}	
+
+	if (scaley >= 1) {
+		ydir = -1;
+	} else if (scaley <= 0) {
+		ydir = 1;
+	}	
+
+	scalex += xdir * xspeed * modifier;
+	scaley += ydir * yspeed * modifier;
 };
 
 var draw = function(){
-	ctx.drawImage(spr.img, 200,250, spr.img.width, spr.img.height);
+	ctx.drawImage(
+		spr.img,
+		200,
+		250, 
+		spr.img.width * scalex, 
+		spr.img.height * scaley
+	);
 };
 
 //---------------
