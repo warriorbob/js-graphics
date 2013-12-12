@@ -51,7 +51,7 @@ var update = function(modifier) {
 var draw = function() {
 	var image = new Image();
 	image.src = "untitled.png";
-	ctx.drawImage(image, 200, 250);
+	ctx.drawImage(image, 200, 250, 100, 100);
 }
 
 //---------------
