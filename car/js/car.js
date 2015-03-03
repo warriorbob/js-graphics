@@ -50,7 +50,7 @@ drawSquare = function(x,y) {
 	ctx.stroke();
 }
 
-var fps = 30;
+var fps = 60;
 
 function animate() {
 	resetGraphics();
